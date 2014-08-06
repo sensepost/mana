@@ -1,14 +1,17 @@
 upstream=wlan0
 phy=wlan7
+conf=conf/hostapd-karma.conf
+hostapd=../hostapd-manna/hostapd/hostapd
 
 ifconfig $phy up
 
-../hostapd/hostapd hostapd-karma.conf&
+sed -i "s/^interface=.*$/interface=$phy/" $conf
+$hostapd $conf&
 sleep 5
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-dhcpd -cf dhcpd.conf $phy
+dhcpd -cf conf/dhcpd.conf $phy
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
