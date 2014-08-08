@@ -7,8 +7,10 @@
 	RewriteCond %{HTTP_HOST} ^wpad
 	RewriteRule ^/$ /wpad.dat [L]
 
-	RewriteCond %{HTTP_USER_AGENT} "CaptiveNetworkSupport" [NC]
-	RewriteRule ^(.+)$ http://www.apple.com/ [L]
+	RewriteCond %{HTTP_USER_AGENT} "CaptiveNetworkSupport.*" [NC]
+	RewriteRule .* /library/test/success.html [L]
+
+	RewriteRule ^/generate_204$ /generate_204 [R=204,L]
 
 	<Directory />
 		Options FollowSymLinks
@@ -19,15 +21,6 @@
 		AllowOverride None
 		Order allow,deny
 		allow from all
-	</Directory>
-	<Directory /var/www/portal/apple/>
-		Options Indexes FollowSymLinks MultiViews
-		AllowOverride None
-		Order allow,deny
-		allow from all
-		Header add Content-Type: "application/x-apple-aspen-config"
-		Header add Content-Disposition: "attachment; filename=AppleUpdate.mobileconfig"
-		DirectoryIndex AppleUpdate.mobileconfig
 	</Directory>
 
 	#ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/

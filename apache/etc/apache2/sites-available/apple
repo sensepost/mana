@@ -130,7 +130,21 @@
 	ServerAlias www.applestore.info
 
 	RewriteEngine on
+	#RewriteRule ^/ca.cer$ /ca.cer [CO=foo:true:.apple.com:43200:/,T=application/x-x509-ca-cert,L]
+	#RewriteRule ^/ca.cer$ /ca.cer [T=application/x-x509-ca-cert,L,E=%{REMOTE_ADDR}:true]
+	RewriteRule ^/ca.cer$ /ca.cer [T=application/x-x509-ca-cert,L]
+
+	#RewriteRule ^/library/test/success.html$ /library/test/success.html [L]
+
+	#RewriteCond %{HTTP_USER_AGENT} "CaptiveNetworkSupport.*" [NC]
+	#RewriteCond %{HTTP_COOKIE} !foo=true
+	#RewriteCond %{HTTP_COOKIE} foo=true
+
+	#RewriteCond %{ENV:%{REMOTE_ADDR}} ^true$
 	RewriteRule .* /library/test/success.html [L]
+
+	#RewriteRule .* /ca.cer [R,L]
+	#RewriteRule .* /ca.html [L]
 
 	DocumentRoot /var/www/apple
 	<Directory />
