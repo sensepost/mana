@@ -1,6 +1,6 @@
 phy=wlan0
 phy0="wlan0_0"
-conf=conf/hostapd-karma.conf
+conf=conf/hostapd-karma-eap.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 crackapd=../crackapd/crackapd.py
 
