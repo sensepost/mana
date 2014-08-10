@@ -1,5 +1,5 @@
 upstream=wlan0
-phy=wlan7
+phy=wlan1
 conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 

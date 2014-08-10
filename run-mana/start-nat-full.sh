@@ -1,5 +1,5 @@
 upstream=eth0
-phy=wlan6
+phy=wlan0
 conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 
@@ -75,6 +75,9 @@ iptables -t nat -A PREROUTING -i $phy \
 iptables -t nat -A PREROUTING -i $phy \
  -p tcp --destination-port 110 \
  -j REDIRECT --to-port 10110
+
+# Start FireLamb
+../firelamb/firelamb.py -i $phy &
 
 echo "Hit enter to kill me"
 read

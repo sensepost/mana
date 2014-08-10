@@ -1,4 +1,4 @@
-phy=wlan1
+phy=wlan0
 conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 
