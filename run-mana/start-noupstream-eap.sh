@@ -17,6 +17,7 @@ $crackapd&
 # Start hostapd
 sed -i "s/^interface=.*$/interface=$phy/" $conf
 sed -i "s/^bss=.*$/bss=$phy0/" $conf
+sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" conf/karmetasploit.rc
 $hostapd $conf&
 sleep 5
 ifconfig $phy
@@ -35,7 +36,6 @@ service stunnel4 start
 tinyproxy -c conf/tinyproxy.conf&
 msfconsole -r conf/karmetasploit.rc&
 
-service ferm stop
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
 iptables --policy FORWARD ACCEPT
@@ -55,4 +55,3 @@ pkill stunnel4
 pkill msfconsole
 service apache2 stop
 iptables -t nat -F
-service ferm start

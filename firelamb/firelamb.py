@@ -16,7 +16,7 @@ from subprocess import Popen
 import os
 
 
-save_dir='./lamb_braai/'
+save_dir='../loot/lamb_braai/'
 ip_logging=False
 
 

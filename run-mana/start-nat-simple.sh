@@ -30,4 +30,3 @@ pkill sslsplit
 pkill hostapd
 pkill python
 iptables -t nat -F
-service ferm start
