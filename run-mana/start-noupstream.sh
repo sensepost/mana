@@ -6,6 +6,8 @@ hostname WRT54G
 echo hostname WRT54G
 sleep 2
 
+service network-manager stop
+
 ifconfig $phy down
 macchanger -r $phy
 ifconfig $phy up

@@ -3,6 +3,8 @@ phy=wlan1
 conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 
+service network-manager stop
+
 ifconfig $phy up
 
 sed -i "s/^interface=.*$/interface=$phy/" $conf

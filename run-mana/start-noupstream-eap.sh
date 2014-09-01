@@ -14,6 +14,8 @@ echo $EXNODE
 mkfifo $EXNODE
 $crackapd&
 
+service network-manager stop
+
 # Start hostapd
 sed -i "s/^interface=.*$/interface=$phy/" $conf
 sed -i "s/^bss=.*$/bss=$phy0/" $conf
