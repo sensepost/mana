@@ -15,6 +15,7 @@ mkfifo $EXNODE
 $crackapd&
 
 service network-manager stop
+rfkill unblock wlan
 
 # Start hostapd
 sed -i "s/^interface=.*$/interface=$phy/" $conf

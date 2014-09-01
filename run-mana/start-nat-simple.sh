@@ -4,6 +4,7 @@ conf=conf/hostapd-karma.conf
 hostapd=../hostapd-manna/hostapd/hostapd
 
 service network-manager stop
+rfkill unblock wlan
 
 ifconfig $phy up
 
