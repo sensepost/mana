@@ -9,7 +9,7 @@ read
 
 apt-get install libnl-dev isc-dhcp-server tinyproxy libssl-dev apache2 macchanger python-dnspython python-pcapy dsniff stunnel4
 
-echo "deb http://http.kali.org/kali kali main non-free contrib" > /etc/apt/sources.list.d/mana-kali
+echo "deb http://http.kali.org/kali kali main non-free contrib" > /etc/apt/sources.list.d/mana-kali.list
 #echo """Package: sslsplit, python-scapy, metasploit-framework
 #Pin: release o=Kali, n=kali
 #Pin-Priority: 501""" > /etc/apt/preferences.d/mana-kali.list
