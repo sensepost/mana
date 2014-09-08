@@ -7,7 +7,7 @@ echo hostname WRT54G
 sleep 2
 
 service network-manager stop
-rkfill unblock wlan
+rfkill unblock wlan
 
 ifconfig $phy down
 macchanger -r $phy
