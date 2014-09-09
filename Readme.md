@@ -34,7 +34,11 @@ The ubuntu installer has much more dependency info than the kali one if you're l
 Pre-Requisites
 --------------
 
-** Hardware
+_Software_
+
+Check the ubuntu installer for more details on software pre-requisites.
+
+_Hardware_
 
 You'll need a wifi card that supports master mode. You can check whether it does by running:
     iw list
@@ -54,10 +58,6 @@ Three cards that have been confirmed to work well, in order of preference are:
 * Ubiquiti SR-71 (not made anymore :(, chipset AR9170, driver carl9170 http://wireless.kernel.org/en/users/Drivers/carl9170 ) 
 * Alfa Black AWUS036NHA (chipset Atheros AR9271, buy at http://store.rokland.com/products/alfa-awus036nha-802-11n-wireless-n-usb-wi-fi-adapter-2-watt ) 
 * TP-Link TL-WN722N (chipset Atheros AR9271 )
-
-** Software
-
-Check the ubuntu installer for more details on software pre-requisites.
 
 Running
 -------
