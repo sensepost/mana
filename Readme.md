@@ -23,11 +23,9 @@ It contains:
 Installation
 ------------
 
-Both installers require the files to be in /root/mana at the moment.
+To get up and running setup a Kali 1.0.8 box (VM or otherwise), update it, then run kali-install.sh
 
-To get up and running setup a Kali 1.0.8 box (VM or otherwise), update it, then run kali-install.sh from /root/mana/
-
-To get up and running setup a Ubuntu 14.04 box (VM or otherwise), update it, then run ubuntu-install.sh from /root/mana/
+To get up and running setup a Ubuntu 14.04 box (VM or otherwise), update it, then run ubuntu-install.sh
 
 The ubuntu installer has much more dependency info than the kali one if you're looking for a template.
 

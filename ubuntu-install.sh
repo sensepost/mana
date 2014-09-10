@@ -3,7 +3,7 @@ set -e
 
 echo SensePost Mana Installer
 echo [+] This is not a very good installer, it makes a lot of assumptions
-echo [+] It assumes you are running Ubuntu 14.04 and mana in in /root/mana
+echo [+] It assumes you are running Ubuntu 14.04
 echo [+] If you are worried about that, hit Ctl-C now, or hit Enter to continue
 read
 
@@ -20,9 +20,8 @@ apt-get update
 apt-get install sslsplit python-scapy metasploit-framework
 
 cp /etc/apparmor.d/usr.sbin.dhcpd /etc/apparmor.d/disable/
-cd hostapd-manna/hostapd/
+
 make
-cd ../../apache
-cp -R . /
-a2enmod rewrite
+make install
+
 echo "[+] All done, I think, run one of the run-mana/start-*.sh scripts now"
