@@ -1,2 +1,2 @@
 #!/bin/sh
-../firelamb/firelamb.py -l -t sslsplit
+../firelamb/firelamb.py -l -t ../loot/sslsplit
