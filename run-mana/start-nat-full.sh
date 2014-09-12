@@ -81,7 +81,7 @@ iptables -t nat -A PREROUTING -i $phy \
  -j REDIRECT --to-port 10110
 
 # Start FireLamb
-../firelamb/firelamb.py -i $phy &
+/usr/share/mana-toolkit/firelamb/firelamb.py -i $phy &
 
 echo "Hit enter to kill me"
 read

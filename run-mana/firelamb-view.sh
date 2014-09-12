@@ -1,2 +1,2 @@
 #!/bin/sh
-../firelamb/firelamb.py -l -t ../loot/sslsplit
+/usr/share/mana-toolkit/firelamb/firelamb.py -l -t /var/lib/mana-toolkit/sslsplit/
