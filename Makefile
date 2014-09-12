@@ -11,7 +11,7 @@ install:
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/cert
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/run-mana
 	install -d -m 755 $(DESTDIR)/usr/lib/mana-toolkit/
-	install -d -m 755 $(DESTDIR)/var/lib/mana-toolkit/sslplit
+	install -d -m 755 $(DESTDIR)/var/lib/mana-toolkit/sslsplit
 	install -d -m 755 $(DESTDIR)/etc/mana-toolkit/
 	install -d -m 755 $(DESTDIR)/etc/stunnel/
 	install -d -m 755 $(DESTDIR)/etc/apache2/sites-available/
