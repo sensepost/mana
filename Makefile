@@ -23,6 +23,7 @@ install:
 	install -m 644 apache/etc/stunnel/stunnel.conf $(DESTDIR)/etc/stunnel/mana-toolkit.conf
 	# Install the hostapd binary
 	install -m 755 hostapd-manna/hostapd/hostapd $(DESTDIR)/usr/lib/mana-toolkit/
+	install -m 755 hostapd-manna/hostapd/hostapd_cli $(DESTDIR)/usr/lib/mana-toolkit/
 	# Install the data
 	cp -R apache/var/www/* $(DESTDIR)/usr/share/mana-toolkit/www/
 	install -m 644 run-mana/cert/* $(DESTDIR)/usr/share/mana-toolkit/cert/
