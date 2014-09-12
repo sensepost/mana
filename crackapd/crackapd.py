@@ -45,7 +45,7 @@ def WriteResult(s_file, s_string):
 			if s_string in dataline:
 				found = True
 				break
-		
+
 		if found == False:
 			f = open(s_file, 'a')
 			f.write(str(s_string) + "\n")
@@ -96,7 +96,7 @@ class GetIt(Thread):
 					PrintResult(self.the_verbose, "MANA - CrackApd - Credentials Cracked.")
 					PrintResult(self.the_verbose, "MANA - CrackApd - " + str(self.response))
 					WriteResult(self.the_user, self.response)
-			
+
 # *duh*  The main process entry...
 if __name__ == '__main__':
 
@@ -108,9 +108,9 @@ if __name__ == '__main__':
 	VERBOSE=1
 	THREADS=10
 	RUNFILE="/tmp/crackapd.run"
-	HOSTAPD="conf/hostapd-karma-eap.conf"
-	EAPUSER="conf/hostapd.eap_user"
-	ENNODES="/root/ennode.node"
+	HOSTAPD="/etc/mana-toolkit/hostapd-karma-eap.conf"
+	EAPUSER="/etc/mana-toolkit/hostapd.eap_user"
+	ENNODES="/var/lib/mana-toolkit/ennode.node"
 	CRACKEX="/usr/bin/asleap"
 	WORDLST="/usr/share/wordlists/rockyou.txt"
 
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 			exec(i)
 	except:
 		PrintResult(VERBOSE, "MANA - CrackApd -  ! Could not load configuration file.  Using defaults")
-	
+
 	PrintResult(VERBOSE, "MANA - CrackApd -  + Loaded Configuration.")
 	PrintResult(VERBOSE, "MANA - CrackApd -  + Verbose               : " + str(VERBOSE))
 	PrintResult(VERBOSE, "MANA - CrackApd -  + Total Threads         : " + str(THREADS))
@@ -206,7 +206,7 @@ if __name__ == '__main__':
 	PrintResult(VERBOSE, "MANA - CrackApd - Run file has been removed. We're exiting now...")
 	if INPUTNODE != None:
 		INPUTNODE.close()
-	
+
 	# The threads will end when they receive a NONE from the queue.  We add a None for each thread.
 	for i in range(THREADS):
 		PrintResult(VERBOSE, "MANA - CrackApd - Clearing Threads")
