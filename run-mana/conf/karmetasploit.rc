@@ -90,11 +90,6 @@ exploit -j
 #set SRVPORT 80
 #exploit -j
 
-#use auxiliary/server/capture/https
-#set SSL true
-#set SRVPORT 443
-#exploit -j
-
 #use auxiliary/server/capture/http_basic
 #set URIPATH /
 #set SSL true
