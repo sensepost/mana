@@ -1,6 +1,6 @@
 #!/bin/bash
 
-upstream=wlan0
+upstream=eth0
 phy=wlan1
 conf=/etc/mana-toolkit/hostapd-karma.conf
 hostapd=/usr/lib/mana-toolkit/hostapd
