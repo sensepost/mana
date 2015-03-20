@@ -159,7 +159,7 @@ dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 dnsspoof -i $phy -f /root/mana/run-mana/conf/dnsspoof.conf&
 
 echo "pushing captive portal apache virtual host confs into main apache dir"
-cp /root/mana/apache/etc/apache2/sites-available/* /etc/apache2/sites-available
+cp /root/mana/apache/etc/apache2/sites-enabled/* /etc/apache2/sites-enabled
 echo "all done, now starting apache"
 service apache2 start
 service stunnel4 start
