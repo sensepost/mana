@@ -16,7 +16,7 @@ from subprocess import Popen
 import os
 
 
-save_dir='/var/lib/mana-toolkit/lamb_braai/'
+save_dir='/root/mana/treasures/lamb_braai/'
 ip_logging=False
 
 
