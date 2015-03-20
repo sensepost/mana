@@ -157,6 +157,10 @@ route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
 dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 dnsspoof -i $phy -f /root/mana/run-mana/conf/dnsspoof.conf&
+
+echo "pushing captive portal apache virtual host confs into main apache dir"
+cp /root/mana/apache/etc/apache2/sites-available/* /etc/apache2/sites-available
+echo "all done, now starting apache"
 service apache2 start
 service stunnel4 start
 tinyproxy -c /root/mana/run-mana/conf/tinyproxy.conf&
