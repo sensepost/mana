@@ -6,7 +6,7 @@
 upstream=eth0
 # phy=wlan0
 conf=/root/mana/run-mana/conf/hostapd-karma.conf
-hostapd=/root/mana/hostapd-manna/hostapd
+hostapd=/root/mana/hostapd-manna/hostapd/hostapd
 ifwl="(ifconfig | grep wlan*)"
 S1='y'
 S2='n'
@@ -28,6 +28,10 @@ echo -e "\033[38;5;220m Internet connection (tunnels, the tube etc.) \033[39m"
 echo -e
 echo -e "\033[38;5;220m This mode also contains the captive portal \033[39m"
 echo -e
+echo -e 
+echo -e "\033[38;5;220m This assumes you cloned the git repo into /root/mana"
+echo -e
+echo -e 
 echo -e "\033[38;5;220m Press ENTER to continue \033[39m"
 echo -e
 echo -e "\033[38;5;220m--------------------------------------------------\033[39m"

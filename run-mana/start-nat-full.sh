@@ -28,6 +28,9 @@ echo -e "\033[38;5;160m	sslsplit \033[39m"
 echo -e  
 echo -e "\033[38;5;220m You will, however, need an upstream link \033[39m" 
 echo -e
+echo -e "\033[38;5;220m This assumes you cloned the git repo into /root/mana"
+echo -e
+echo -e 
 echo -e "\033[38;5;220m Press ENTER to continue \033[39m"
 echo -e
 echo -e "\033[38;5;220m--------------------------------------------------\033[39m"
