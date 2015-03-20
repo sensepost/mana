@@ -5,8 +5,8 @@
 # Other Useful variables defined
 upstream=eth0
 # phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma.conf
-hostapd=/usr/lib/mana-toolkit/hostapd
+conf=/root/mana/run-mana/conf/hostapd-karma.conf
+hostapd=/root/mana/hostapd-manna/hostapd/hostapd
 ifwl="(ifconfig | grep wlan*)"
 S1='y'
 S2='n'
@@ -149,7 +149,7 @@ rfkill unblock wlan
 # Start hostapd
 sed -i "s/^interface=.*$/interface=$phy/" $conf
 sed -i "s/^bss=.*$/bss=$phy0/" $conf
-sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" /etc/mana-toolkit/karmetasploit.rc
+sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" /root/mana/run-mana/conf/karmetasploit.rc
 $hostapd $conf&
 sleep 5
 ifconfig $phy
@@ -159,14 +159,14 @@ route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 ifconfig $phy0 10.1.0.1 netmask 255.255.255.0
 route add -net 10.1.0.0 netmask 255.255.255.0 gw 10.1.0.1
 
-dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
-dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf /etc/mana-toolkit/dhcpd-two.conf $phy0
-dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
-dnsspoof -i $phy0 -f /etc/mana-toolkit/dnsspoof.conf&
+dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
+dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf /root/mana/run-mana/conf/dhcpd-two.conf $phy0
+dnsspoof -i $phy -f /root/mana/run-mana/conf/dnsspoof.conf&
+dnsspoof -i $phy0 -f /root/mana/run-mana/conf/dnsspoof.conf&
 service apache2 start
 service stunnel4 start
-tinyproxy -c /etc/mana-toolkit/tinyproxy.conf&
-msfconsole -r /etc/mana-toolkit/karmetasploit.rc&
+tinyproxy -c /root/mana/run-mana/conf/tinyproxy.conf&
+msfconsole -r /root/mana/run-mana/conf/karmetasploit.rc&
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT

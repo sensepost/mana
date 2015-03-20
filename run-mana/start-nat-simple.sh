@@ -5,8 +5,8 @@
 # Other Useful variables defined
 upstream=eth0
 # phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma.conf
-hostapd=/usr/lib/mana-toolkit/hostapd
+conf=/root/mana/hostapd-manna/hostapd/hostapd-karma.conf
+hostapd=/root/mana/hostapd-manna/hostapd/hostapd
 ifwl="(ifconfig | grep wlan*)"
 S1='y'
 S2='n'
@@ -150,7 +150,7 @@ ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
 echo "[+] Configuring dhcpd."
-dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
+dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 
 echo "[+] Setting iptables to ACCEPT traffic."
 echo -e "${red}[!]${nc} iptables will be FLUSHED when complete but we would recommend you check this manually to be sure"

