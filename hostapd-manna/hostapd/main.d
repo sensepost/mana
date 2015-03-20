@@ -1,0 +1,29 @@
+main.o: main.c /root/mana/hostapd-manna/src/utils/includes.h \
+ /root/mana/hostapd-manna/src/utils/build_config.h \
+ /root/mana/hostapd-manna/src/utils/common.h \
+ /root/mana/hostapd-manna/src/utils/os.h \
+ /root/mana/hostapd-manna/src/utils/wpa_debug.h \
+ /root/mana/hostapd-manna/src/utils/wpabuf.h \
+ /root/mana/hostapd-manna/src/utils/eloop.h \
+ /root/mana/hostapd-manna/src/utils/uuid.h \
+ /root/mana/hostapd-manna/src/crypto/random.h \
+ /root/mana/hostapd-manna/src/crypto/tls.h \
+ /root/mana/hostapd-manna/src/common/version.h \
+ /root/mana/hostapd-manna/src/drivers/driver.h \
+ /root/mana/hostapd-manna/src/common/defs.h \
+ /root/mana/hostapd-manna/src/utils/list.h \
+ /root/mana/hostapd-manna/src/eap_server/eap.h \
+ /root/mana/hostapd-manna/src/eap_common/eap_defs.h \
+ /root/mana/hostapd-manna/src/eap_server/eap_methods.h \
+ /root/mana/hostapd-manna/src/utils/wpabuf.h \
+ /root/mana/hostapd-manna/src/eap_server/tncs.h \
+ /root/mana/hostapd-manna/src/ap/hostapd.h \
+ /root/mana/hostapd-manna/src/ap/ap_config.h \
+ /root/mana/hostapd-manna/src/utils/ip_addr.h \
+ /root/mana/hostapd-manna/src/common/wpa_common.h \
+ /root/mana/hostapd-manna/src/common/ieee802_11_common.h \
+ /root/mana/hostapd-manna/src/wps/wps.h \
+ /root/mana/hostapd-manna/src/wps/wps_defs.h \
+ /root/mana/hostapd-manna/src/ap/ap_config.h \
+ /root/mana/hostapd-manna/src/ap/ap_drv_ops.h config_file.h \
+ eap_register.h ctrl_iface.h
