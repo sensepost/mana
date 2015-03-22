@@ -1,9 +1,10 @@
 #!/bin/bash
 # Original script by Dominic White and Ian de Villiers
-# Changes made by John & Daniel Cuthbert 
+# Changes made by John & Daniel Cuthbert
 
 # Other Useful variables defined
 upstream=eth0
+hostname=WRT54G
 # phy=wlan0
 conf=/root/mana/hostapd-manna/hostapd/hostapd-karma.conf
 hostapd=/root/mana/hostapd-manna/hostapd/hostapd
@@ -17,19 +18,19 @@ echo -e "\033[38;5;220m--------------------------------------------------\033[39
 echo -e "\033[38;5;220m Welcome to SensePost's MANA \033[39m"
 echo -e "\033[38;5;220m Making Rogue Access Points fun for all \033[39m"
 echo -e "\033[38;5;220m @SensePost / http://sensepost.com \033[39m"
-echo 
-echo -e "\033[38;5;220m This script starts up will start MANA \033[39m"
-echo -e "\033[38;5;220m in NAT mode, but without the following: \033[39m"
-echo 
-echo -e "\033[38;5;160m	[+] Firelamb \033[39m"
-echo -e "\033[38;5;160m [+] sslstrip \033[39m"
-echo -e "\033[38;5;160m	[+] sslsplit \033[39m"
-echo -e  
-echo -e "\033[38;5;220m You will, however, need an upstream link \033[39m" 
-echo -e 
+echo
+echo -e "\033[38;5;220m This script will start MANA in NAT mode, \033[39m"
+echo -e "\033[38;5;220m but without the following: \033[39m"
+echo
+echo -e "\033[38;5;160m	[-] Firelamb \033[39m"
+echo -e "\033[38;5;160m [-] sslstrip \033[39m"
+echo -e "\033[38;5;160m	[-] sslsplit \033[39m"
+echo -e
+echo -e "\033[38;5;220m You will, however, need an upstream link \033[39m"
+echo -e
 echo -e "\033[38;5;220m This assumes you cloned the git repo into /root/mana"
 echo -e
-echo -e 
+echo -e
 echo -e "\033[38;5;220m Press ENTER to continue \033[39m"
 echo -e
 echo -e "\033[38;5;220m--------------------------------------------------\033[39m"
@@ -66,7 +67,7 @@ fi
 
 # This detects wireless interfaces and exits if no suitable interfaces are found
 
-ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"  
+ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"
 if [ "${ntst}" = '1' ]
 	then
 		echo -e "\033[38;5;120m Whoop!! an active network connection has been detected\033[39m"
@@ -127,12 +128,11 @@ fi
 
 mstrchk
 
-# figure out how to change this back to the orignial hostname when finished...perhaps assign the output of <echo /etc/hostname> to a variable and then run <hostname ${vairable name}>???
 function nmchng()
 {
-echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}WRT54G${nc}."  # Will this change only affect this terminal session.?"
-hostname WRT54G
-echo hostname WRT54G
+echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}$hostname${nc}."
+hostname $hostname
+echo hostname $hostname
 sleep 2
 }
 
@@ -148,14 +148,14 @@ sed -i "s/^interface=.*$/interface=$phy/" $conf
 $hostapd $conf&
 sleep 5
 
-echo "[+] Setting >$phy< to 10.0.0.1 with a netmask of 255.255.255.0"
+echo -e "${grn}[+]${nc} Setting >$phy< to 10.0.0.1 with a netmask of 255.255.255.0"
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-echo "[+] Configuring dhcpd."
+echo -e "${grn}[+]${nc} Configuring dhcpd."
 dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 
-echo "[+] Setting iptables to ACCEPT traffic."
+echo -e "${grn}[+]${nc} Setting iptables to ACCEPT traffic."
 echo -e "${red}[!]${nc} iptables will be FLUSHED when complete but we would recommend you check this manually to be sure"
 echo "1" > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
@@ -166,7 +166,7 @@ iptables -t nat -F
 iptables -t nat -A POSTROUTING -o $upstream -j MASQUERADE
 iptables -A FORWARD -i $phy -o $upstream -j ACCEPT
 
-echo "Hit enter to kill me"
+echo "${grn}[+]${nc}MANA is now running. If you wish to exit MANA, please press the enter key"
 read
 echo "[!] Killing dhcpd"
 pkill dhcpd

