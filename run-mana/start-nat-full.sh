@@ -55,7 +55,7 @@ read yn
 if [ $yn == "$S1" ]
 then
 	echo -e "\033[38;5;120m Checking for an active network connection on eth0\033[39m"
-
+sleep 2
 elif [ $yn == "$S2" ]
 then
 	echo -e "\033[38;5;160mEXITING...${nc}\033[39m" && exit
@@ -85,7 +85,7 @@ confirm
 function detect()
 {
 echo -e "\033[38;5;120m Detecting wireless interfaces...\033[39m"
-
+sleep 5
 echo -e "\033[38;5;120m I've found the following available:\033[39m"
 echo -e
 ifconfig | grep wlan*
