@@ -159,7 +159,7 @@ dnsspoof -i $phy -f /root/mana/run-mana/conf/dnsspoof.conf&
 echo "${grn}[+]${nc/root/mana/apache/etc/apache2/sites-enabled}Pushing captive portal apache virtual host confs into main apache dir"
 service apache2 stop
 sleep 5
-cp /root/mana/apache/etc/apache2/sites-enabled/* /etc/apache2/sites-enabled/
+cp -R /root/mana/apache/etc/apache2/sites-enabled/* /etc/apache2/sites-enabled/
 sleep 3
 echo "${grn}[+]${nc}All done, now starting Apache, Tinyproxy and msfconsole (this will take a while)"
 service apache2 start
