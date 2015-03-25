@@ -6,4 +6,4 @@
 	url = https://github.com/leonardonve/sslstrip2
 [submodule "sslstrip-hsts/dns2proxy"]
 	path = sslstrip-hsts/dns2proxy
-	url = https://github.com/leonardonve/dns2proxy
+	url = https://github.com/singe/dns2proxy
