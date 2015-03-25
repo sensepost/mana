@@ -84,6 +84,9 @@ iptables -t nat -A PREROUTING -i $phy \
 # Start FireLamb
 /usr/share/mana-toolkit/firelamb/firelamb.py -i $phy &
 
+# Start net-creds
+python /usr/share/mana-toolkit/net-creds/net-creds.py -i $phy >> /var/lib/mana-toolkit/net-creds.log
+
 echo "Hit enter to kill me"
 read
 pkill dhcpd

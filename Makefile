@@ -10,6 +10,7 @@ install:
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/sslstrip
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/dns2proxy
+	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/net-creds
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/cert
 	install -d -m 755 $(DESTDIR)/usr/share/mana-toolkit/run-mana
 	install -d -m 755 $(DESTDIR)/usr/lib/mana-toolkit/
@@ -42,6 +43,8 @@ install:
 	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/sslstrip/
 	chmod 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/sslstrip.py \
 	          $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/dns2proxy/dns2proxy.py
+	install -m 644 net-creds/* \
+	    $(DESTDIR)/usr/share/mana-toolkit/net-creds/
 	install -m 755 run-mana/*.sh $(DESTDIR)/usr/share/mana-toolkit/run-mana
 	# Dynamic configuration (if not fake install)
 	if [ "$(DESTDIR)" = "" ]; then \
