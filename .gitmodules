@@ -4,9 +4,9 @@
 [submodule "sslstrip-hsts/sslstrip2"]
 	path = sslstrip-hsts/sslstrip2
 	url = https://github.com/leonardonve/sslstrip2
-[submodule "sslstrip-hsts/dns2proxy"]
-	path = sslstrip-hsts/dns2proxy
-	url = https://github.com/singe/dns2proxy
 [submodule "net-creds"]
 	path = net-creds
 	url = https://github.com/DanMcInerney/net-creds
+[submodule "sslstrip-hsts/dns2proxy"]
+	path = sslstrip-hsts/dns2proxy
+	url = https://github.com/singe/dns2proxy
