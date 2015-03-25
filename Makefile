@@ -34,12 +34,14 @@ install:
 	install -m 644 firelamb/* $(DESTDIR)/usr/share/mana-toolkit/firelamb/
 	chmod 755 $(DESTDIR)/usr/share/mana-toolkit/firelamb/*.py \
 	          $(DESTDIR)/usr/share/mana-toolkit/firelamb/*.sh
-	install -m 644 sslstrip-hsts/sslstrip/* \
-	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip/
-	install -m 644 $$(find sslstrip-hsts/ -maxdepth 1 -type f) \
-	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/
-	chmod 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip.py \
-	          $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/dns2proxy.py
+	install -m 644 sslstrip-hsts/dns2proxy/* \
+	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/dns2proxy/
+	install -m 644 $$(find sslstrip-hsts/sslstrip2/ -maxdepth 1 -type f) \
+	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/
+	install -m 644 $$(find sslstrip-hsts/sslstrip2/sslstrip/ -maxdepth 1 -type f) \
+	    $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/sslstrip/
+	chmod 755 $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/sslstrip.py \
+	          $(DESTDIR)/usr/share/mana-toolkit/sslstrip-hsts/dns2proxy/dns2proxy.py
 	install -m 755 run-mana/*.sh $(DESTDIR)/usr/share/mana-toolkit/run-mana
 	# Dynamic configuration (if not fake install)
 	if [ "$(DESTDIR)" = "" ]; then \
