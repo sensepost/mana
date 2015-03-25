@@ -40,7 +40,7 @@ cd /usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/
 python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log&
 iptables -t nat -A PREROUTING -i $phy -p tcp --destination-port 80 -j REDIRECT --to-port 10000
 cd /usr/share/mana-toolkit/sslstrip-hsts/dns2proxy/
-python dns2proxy.py $phy&
+python dns2proxy.py -i $phy&
 cd -
 
 #SSLSplit
