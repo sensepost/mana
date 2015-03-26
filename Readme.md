@@ -8,6 +8,8 @@ A toolkit for rogue access point (evilAP) attacks first presented at Defcon 22.
 
 More specifically, it contains the improvements to KARMA attacks we implemented into hostapd, as well as some useful configs for conducting MitM once you've managed to get a victim to connect.
 
+You can read more on our blog at http://www.sensepost.com/blog/11823.html, or watch the talk at https://youtu.be/i2-jReLBSVk or see the text heavy slide version at http://www.slideshare.net/sensepost/improvement-in-rogue-access-points-sensepost-defcon-22
+
 Contents
 --------
 
