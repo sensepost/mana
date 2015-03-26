@@ -35,6 +35,7 @@ iptables --policy FORWARD ACCEPT
 iptables --policy OUTPUT ACCEPT
 iptables -F
 iptables -t nat -F
+iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 
 echo "Hit enter to kill me"
 read
