@@ -32,12 +32,14 @@ To get up and running setup a Kali box (VM or otherwise), update it, then run ka
 To get up and running setup a Ubuntu 14.04 box (VM or otherwise), update it, then run ubuntu-install.sh
 
 If you're installing from git, you can use the following commands after you have grabbed the necessary dependencies:
+```
 git clone https://github.com/sensepost/mana
 git submodule init
 git submodule update
 cd mana
 make
 make install
+```
 
 Pre-Requisites
 --------------
