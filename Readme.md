@@ -25,11 +25,17 @@ Installation
 
 The simplest way to get up and running is it "apt-get install mana-toolkit" on Kali. If you want to go manual, check below. Make sure to edit the start script to point to the right wifi device.
 
-To get up and running setup a Kali 1.0.9 box (VM or otherwise), update it, then run kali-install.sh
+To get up and running setup a Kali box (VM or otherwise), update it, then run kali-install.sh
 
 To get up and running setup a Ubuntu 14.04 box (VM or otherwise), update it, then run ubuntu-install.sh
 
-The ubuntu installer has much more dependency info than the kali one if you're looking for a template.
+If you're installing from git, you can use the following commands after you have grabbed the necessary dependencies:
+git clone https://github.com/sensepost/mana
+git submodule init
+git submodule update
+cd mana
+make
+make install
 
 Pre-Requisites
 --------------
