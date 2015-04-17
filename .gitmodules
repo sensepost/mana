@@ -3,7 +3,7 @@
 	url = https://github.com/sensepost/hostapd-mana
 [submodule "sslstrip-hsts/sslstrip2"]
 	path = sslstrip-hsts/sslstrip2
-	url = https://github.com/leonardonve/sslstrip2
+	url = https://github.com/singe/sslstrip2
 [submodule "net-creds"]
 	path = net-creds
 	url = https://github.com/DanMcInerney/net-creds
