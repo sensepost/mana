@@ -89,3 +89,5 @@ The different start scripts are listed below and must be edited to point to the 
 * start-noupstream-eap.sh - Will start MANA with the EAP attack and noupstream mode.
 
 While these should all work, it's advisable that you craft your own based on your specific needs.
+
+These scripts kill NetworkManager as it prevents hostapd from using the wifi card. If you're using NetworkManager for your upstream connectivity, this can cause problems. Ideally, just manually configure the upstream adapter, however, you could also instruct NetworkManager to ignore certain devices by following the instructions at http://askubuntu.com/questions/21914/how-can-i-make-networkmanager-ignore-my-wireless-card/22166#22166
