@@ -76,7 +76,7 @@
 # WPE - DO NOT REMOVE - These entries are specifically in here 
 *		PEAP,TTLS,TLS,FAST
 *		PEAP,TTLS-MSCHAPV2,MSCHAPV2,MD5,GTC,TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP  "1234test"  [2]
-"t"             PEAP,TTLS-MSCHAPV2,MSCHAPV2,MD5,GTC,TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP  "1234test"  [2]
+"t"     PEAP,TTLS-MSCHAPV2,MSCHAPV2,MD5,GTC,TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP,TTLS  "1234test"  [2]
 
 # Default to EAP-SIM and EAP-AKA based on fixed identity prefixes in phase 2
 #"0"*		AKA	[2]
@@ -85,4 +85,3 @@
 #"3"*		SIM	[2]
 #"4"*		AKA	[2]
 #"5"*		SIM	[2]
-"moo"	PEAP,TTLS-MSCHAPV2,MSCHAPV2,MD5,GTC,TTLS-PAP,TTLS-CHAP,TTLS-MSCHAP	"baa"	[2]
