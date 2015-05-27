@@ -25,7 +25,7 @@ It contains:
 Installation
 ------------
 
-The simplest way to get up and running is it "apt-get install mana-toolkit" on Kali. If you want to go manual, check below. Make sure to edit the start script to point to the right wifi device.
+The simplest way to get up and running is it "apt-get install mana-toolkit" on Kali. If you want to go manual to get the latest version, check below. Make sure to edit the start script to point to the right wifi device.
 
 To get up and running setup a Kali box (VM or otherwise), update it, then run kali-install.sh
 
@@ -33,10 +33,10 @@ To get up and running setup a Ubuntu 14.04 box (VM or otherwise), update it, the
 
 If you're installing from git, you can use the following commands after you have grabbed the necessary dependencies:
 ```
-git clone https://github.com/sensepost/mana
+git clone --depth 1 https://github.com/sensepost/mana
+cd mana
 git submodule init
 git submodule update
-cd mana
 make
 make install
 ```
@@ -50,7 +50,7 @@ Check the ubuntu installer for more details on software pre-requisites.
 
 _Hardware_
 
-You'll need a wifi card that supports master mode. You can check whether it does by running:
+You'll need a wifi card that supports "access point"/"master" mode. You can check whether it does by running:
     iw list
 You want to see "AP" in the output. Something like:
 ```
@@ -69,7 +69,7 @@ Three cards that have been confirmed to work well, in order of preference are:
 * Alfa Black AWUS036NHA (chipset Atheros AR9271, buy at http://store.rokland.com/products/alfa-awus036nha-802-11n-wireless-n-usb-wi-fi-adapter-2-watt ) 
 * TP-Link TL-WN722N (chipset Atheros AR9271 )
 
-Note, the silver Alfa does not support master mode and will not work.
+Note, the old silver Alfa (AWUS036H) does not support master mode and will not work, but the new silver Alfa (AWUS050NH) does.
 
 Running
 -------
