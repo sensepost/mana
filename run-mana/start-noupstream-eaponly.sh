@@ -1,7 +1,7 @@
 #!/bin/bash
 
 phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma-eap.conf
+conf=/etc/mana-toolkit/hostapd-karma-eaponly.conf
 hostapd=/usr/lib/mana-toolkit/hostapd
 crackapd=/usr/share/mana-toolkit/crackapd/crackapd.py
 
@@ -52,5 +52,6 @@ pkill tinyproxy
 pkill stunnel4
 pkill msfconsole
 pkill python
+pkill ruby
 service apache2 stop
 iptables -t nat -F
