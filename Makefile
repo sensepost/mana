@@ -46,6 +46,7 @@ install:
 	# Dynamic configuration (if not fake install)
 	if [ "$(DESTDIR)" = "" ]; then \
 	    a2enmod rewrite || true; \
+	    a2dissite 000-default || true; \
 	    for conf in apache/etc/apache2/sites-available/*; do \
 	        a2ensite `basename $$conf` || true; \
 	    done; \
