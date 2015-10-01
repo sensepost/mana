@@ -37,7 +37,7 @@ dhcpd -pf /var/run/dhcpd-two.pid -lf /var/lib/dhcp/dhcpd-two.leases -cf /etc/man
 dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
 dnsspoof -i $phy0 -f /etc/mana-toolkit/dnsspoof.conf&
 service apache2 start
-service stunnel4 start
+stunnel4 /etc/mana-toolkit/stunnel.conf
 tinyproxy -c /etc/mana-toolkit/tinyproxy.conf&
 msfconsole -r /etc/mana-toolkit/karmetasploit.rc&
 

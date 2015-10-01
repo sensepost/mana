@@ -82,7 +82,7 @@ function tinyproxy() {
 }
 
 function stunnel() {
-service stunnel4 start
+	stunnel4 /etc/mana-toolkit/stunnel.conf
 }
 
 function dhcpd() {
@@ -193,7 +193,7 @@ function killem() {
 	pkill python
 	pkill ruby
 	service apache2 stop
-	service stunnel4 stop
+	pkill stunnel4
 	iptables --policy INPUT ACCEPT
 	iptables --policy FORWARD ACCEPT
 	iptables --policy OUTPUT ACCEPT

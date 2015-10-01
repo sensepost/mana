@@ -30,7 +30,7 @@ route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
 dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
 service apache2 start
-service stunnel4 start
+stunnel4 /etc/mana-toolkit/stunnel.conf
 tinyproxy -c /etc/mana-toolkit/tinyproxy.conf&
 msfconsole -r /etc/mana-toolkit/karmetasploit.rc&
 

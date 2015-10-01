@@ -26,7 +26,4 @@ apt-get --yes install apache2 dsniff isc-dhcp-server macchanger \
     sslsplit stunnel4 tinyproxy procps iptables asleap scapy
 make install
 
-#Disable the default apache site on Kali as it is replaced by mana's
-a2dissite 000-default
-
 echo "[+] All done, I think, run one of the run-mana/start-*.sh scripts now"
