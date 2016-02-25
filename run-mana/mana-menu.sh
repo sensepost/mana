@@ -37,7 +37,7 @@ function crackapd() {
 
 function start_hostapd() {
 	hostapd=$lib/hostapd
-	conf=$etc/hostapd-karma.conf
+	conf=$etc/hostapd-mana.conf
 	sed -i "s/^interface=.*$/interface=$phy/" $conf
 	$hostapd $conf&
 	sleep 5
@@ -47,7 +47,7 @@ function start_hostapd() {
 
 function start_hostapd_eap() {
 	hostapd=$lib/hostapd
-	conf=$etc/hostapd-karma-eap.conf
+	conf=$etc/hostapd-mana-eap.conf
 	sed -i "s/^interface=.*$/interface=$phy/" $conf
 	sed -i "s/^bss=.*$/bss=$phy0/" $conf
 	$hostapd $conf&

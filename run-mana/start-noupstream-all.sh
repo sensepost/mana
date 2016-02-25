@@ -2,7 +2,7 @@
 
 phy=wlan0
 phy0="wlan0_0"
-conf=/etc/mana-toolkit/hostapd-karma-all.conf
+conf=/etc/mana-toolkit/hostapd-mana-all.conf
 hostapd=/usr/lib/mana-toolkit/hostapd
 crackapd=/usr/share/mana-toolkit/crackapd/crackapd.py
 

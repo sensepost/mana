@@ -17,7 +17,7 @@ It contains:
 * kali/ubuntu-install.sh - simple installers for Kali 1.0.9 and Ubuntu 14.04 (trusty)
 * slides - an explanation of what we're doing here
 * run-mana - the controller scripts
-* hostapd-manna - modified hostapd that implements our new karma attacks
+* hostapd-mana - modified hostapd that implements our new mana attacks
 * crackapd - a tool for offloading the cracking of EAP creds to an external tool and re-adding them to the hostapd EAP config (auto crack 'n add)
 * sslstrip-hsts - our modifications to LeonardoNVE's & moxie's cool tools
 * apache - the apache vhosts for the noupstream hacks; deploy to /etc/apache2/ and /var/www/ respectivley

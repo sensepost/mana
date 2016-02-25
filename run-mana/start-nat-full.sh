@@ -2,7 +2,7 @@
 
 upstream=eth0
 phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma.conf
+conf=/etc/mana-toolkit/hostapd-mana.conf
 hostapd=/usr/lib/mana-toolkit/hostapd
 
 hostname WRT54G

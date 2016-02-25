@@ -1,7 +1,7 @@
 #!/bin/bash
 
 phy=wlan0
-conf=/etc/mana-toolkit/hostapd-karma-eaponly.conf
+conf=/etc/mana-toolkit/hostapd-mana-eaponly.conf
 hostapd=/usr/lib/mana-toolkit/hostapd
 crackapd=/usr/share/mana-toolkit/crackapd/crackapd.py
 
