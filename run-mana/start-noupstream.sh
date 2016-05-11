@@ -40,7 +40,7 @@ iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 echo "Hit enter to kill me"
 read
 pkill hostapd
-pkill dhcpd
+pkill dnsmasq
 pkill dnsspoof
 pkill tinyproxy
 pkill stunnel4

@@ -89,7 +89,7 @@ python /usr/share/mana-toolkit/net-creds/net-creds.py -i $phy > /var/lib/mana-to
 
 echo "Hit enter to kill me"
 read
-pkill dhcpd
+pkill dnsmasq
 pkill sslstrip
 pkill sslsplit
 pkill hostapd

@@ -53,7 +53,7 @@ read
 pkill hostapd
 rm /tmp/crackapd.run
 rm $EXNODE
-pkill dhcpd
+pkill dnsmasq
 pkill dnsspoof
 pkill tinyproxy
 pkill stunnel4

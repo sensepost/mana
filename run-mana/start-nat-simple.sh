@@ -29,7 +29,7 @@ iptables -A FORWARD -i $phy -o $upstream -j ACCEPT
 
 echo "Hit enter to kill me"
 read
-pkill dhcpd
+pkill dnsmasq
 pkill sslstrip
 pkill sslsplit
 pkill hostapd
