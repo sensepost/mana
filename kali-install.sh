@@ -21,7 +21,7 @@ fi
 make
 
 # Install dependencies
-apt-get --yes install apache2 dsniff isc-dhcp-server macchanger \
+apt-get --yes install apache2 dsniff dnsmasq macchanger \
     metasploit-framework python-dnspython python-pcapy python-scapy \
     sslsplit stunnel4 tinyproxy procps iptables asleap scapy
 make install

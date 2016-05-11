@@ -1,4 +1,5 @@
 #!/bin/bash
+#This is a work in progress and not complete, don't use it
 
 upstream=eth0
 phy=wlan0

