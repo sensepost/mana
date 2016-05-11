@@ -1,0 +1,16 @@
+# List of MAC addresses that are allowed to authenticate (IEEE 802.11)
+# with the AP. Optional VLAN ID can be assigned for clients based on the
+# MAC address if dynamic VLANs (hostapd.conf dynamic_vlan option) are used.
+# A MAC mask can be used to specify a range of MAC addresses. However
+# this is only useful with mana_macacl and ignored by normal macaddr_acl
+# behaviour.
+# For example:
+# 00:11:22:33:44:55		00:ff:00:ff:00:ff
+# will be similar to saying allow all MAC addresses that match: *:11:*:33:*:55
+#
+# Locally administered MACs (i.e. the random MACs) used by some device to probe
+# for networks are handled by the below MAC and mask. It's essentially checking
+# for the second bit having been set in the MAC i.e. ??????1?:*:*:*:*:*
+02:00:00:00:00:00 	02:00:00:00:00:00
+#Allow all
+00:00:00:00:00:00	00:00:00:00:00:00
