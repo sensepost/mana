@@ -32,7 +32,7 @@ dnsspoof -i $phy -f /etc/mana-toolkit/dnsspoof.conf&
 service apache2 start
 stunnel4 /etc/mana-toolkit/stunnel.conf
 tinyproxy -c /etc/mana-toolkit/tinyproxy.conf&
-msfconsole -r /etc/mana-toolkit/karmetasploit.rc&
+msfconsole -r /etc/mana-toolkit/karmetasploit.rc
 
 echo '1' > /proc/sys/net/ipv4/ip_forward
 iptables --policy INPUT ACCEPT
