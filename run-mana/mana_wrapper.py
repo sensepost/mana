@@ -33,4 +33,4 @@ elif args.sns:
 elif args.snos:
    os.system("bash start-noupstream.sh")
 elif args.snoseap:
-   os.system("bash start-noupstream-eap.sh")
+   os.system("bash start-noupstream-eaponly.sh")
