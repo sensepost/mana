@@ -193,14 +193,37 @@ if __name__ == '__main__':
 	# We'll now enter the main loop. We check to see whether the runfile exists.
 	# if it does, we continue processing.
 	# If it does not, we exit and put None in the queues...
-	while(os.path.isfile(RUNFILE)):
+        # Open tow files(hashcat_hashes.txt / John_hashes.txt) to write the hashes to.
+        fh_hashcat_hashes = open("/tmp/Hashcat_hashes.txt", "a", 1)
+        fh_john_hashes = open("/tmp/John_hashes.txt", "a", 1)
+	
+        while(os.path.isfile(RUNFILE)):
 		if INPUTNODE == None:
 			break
 		s = INPUTNODE.readline()
 		if str(s) != "":
 			s = str(s).replace("\r", "").replace("\n", "")
 			PrintResult(VERBOSE, "MANA - CrackApd - ITEM ADDED TO QUEUE " + str(s))
-			WRKQUEUE.put(s)
+
+                        # Thomas edit
+                        print(str(s))
+			
+                        (a,b,c,d) = str(s).split("|")
+                        hash_name = str(b)
+                        hash_part1 = str(c).replace(":", "")
+                        hash_part2 = str(d).replace(":", "")
+
+                        # hashcat
+                        hashcat_hash = hash_name + ":" * 4 + hash_part2 + ":" * 1 + hash_part1
+                        fh_hashcat_hashes.write(hashcat_hash + "\n")
+                        # John
+                        john_hash = hash_name + ":" * 1 + "$NETNTLM$" + hash_part1 + "$" + hash_part2 + ":" * 7
+                        fh_john_hashes.write(john_hash + "\n")
+                        print("Hashcat hash is: " + str(hashcat_hash))
+                        print
+                        print("John hash is: " + str(john_hash))
+
+                        WRKQUEUE.put(s)
 
 	# If we reach this, the runfile has been removed. We exit.
 	PrintResult(VERBOSE, "MANA - CrackApd - Run file has been removed. We're exiting now...")
@@ -211,3 +234,7 @@ if __name__ == '__main__':
 	for i in range(THREADS):
 		PrintResult(VERBOSE, "MANA - CrackApd - Clearing Threads")
 		WRKQUEUE.put(None)
+        
+        # Close hash files
+        fh_hashcat_hashes.close
+        fh_john_hashes.close
