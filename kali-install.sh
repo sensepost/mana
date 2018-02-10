@@ -17,13 +17,14 @@ else
 	apt-get --yes install libnl-dev libssl-dev
 fi
 
-
 make
 
 # Install dependencies
 apt-get --yes install apache2 dsniff dnsmasq macchanger \
     metasploit-framework python-dnspython python-pcapy python-scapy \
-    sslsplit stunnel4 tinyproxy procps iptables asleap scapy
+    sslsplit stunnel4 tinyproxy procps iptables asleap scapy \
+    bettercap
+    
 make install
 
 echo "[+] All done, I think, run one of the run-mana/start-*.sh scripts now"
